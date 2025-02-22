@@ -22,7 +22,7 @@ collection = chroma_client.get_or_create_collection(
 
 client = OpenAI(api_key=openai_key)
 
-resp = client.chat.completions.create(
+'''resp = client.chat.completions.create(
      model="gpt-3.5-turbo",
      messages=[
          {"role": "system", "content": "You are a helpful assistant."},
@@ -31,6 +31,18 @@ resp = client.chat.completions.create(
              "content": "What is human life expectancy in the United States?",
          },
      ],
- )
+ )'''
 
-print(resp.choices[0].message.content)
+#print(resp.choices[0].message.content)
+
+# Function to load documents from a directory
+def load_documents_from_directory(directory_path):
+    print("==== Loading documents from directory ====")
+    documents = []
+    for filename in os.listdir(directory_path):
+        if filename.endswith(".txt"):
+            with open(
+                os.path.join(directory_path, filename), "r", encoding="utf-8"
+            ) as file:
+                documents.append({"id": filename, "text": file.read()})
+    return documents
