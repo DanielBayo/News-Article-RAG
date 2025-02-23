@@ -62,7 +62,7 @@ def split_text(text, chunk_size=1000, chunk_overlap=20):
 directory_path = "./news_articles"
 documents = load_documents_from_directory(directory_path)
 
-print(f"Loaded {len(documents)} documents")
+#print(f"Loaded {len(documents)} documents")
 
 # Split documents into chunks
 chunked_documents = []
@@ -73,9 +73,9 @@ for doc in documents[0:1]:
         chunked_documents.append({"id": f"{doc['id']}_chunk{i+1}", "text": chunk})
 
 #print(chunked_documents)
-# print(f"Split documents into {len(chunked_documents)} chunks")
+#print(f"Split documents into {len(chunked_documents)} chunks")
 
-'''
+
 # Function to generate embeddings using OpenAI API
 def get_openai_embedding(text):
     response = client.embeddings.create(input=text, model="text-embedding-3-small")
@@ -89,7 +89,7 @@ for doc in chunked_documents:
     print("==== Generating embeddings... ====")
     doc["embedding"] = get_openai_embedding(doc["text"])
 
-# print(doc["embedding"])
+#print(doc["embedding"])
 
 # Upsert documents with embeddings into Chroma
 for doc in chunked_documents:
@@ -149,4 +149,4 @@ question = "tell me about databricks"
 relevant_chunks = query_documents(question)
 answer = generate_response(question, relevant_chunks)
 
-print(answer)'''
+print(answer)
